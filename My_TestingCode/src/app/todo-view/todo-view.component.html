@@ -1,0 +1,45 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+    <div class="form-group has-search mt-3 ml-1">
+        <div class="add-button form-control-feedback">
+            <span class="fa fa-search "></span>
+        </div>
+        <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search">
+    </div>
+
+    <div class="spacer"></div>
+    <div class="add-button mr-3" (click)="addNewTodo()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </div>
+</div>
+
+
+<div class="main">
+    <h4 *ngIf="todoList?.length == 0" align="center" class="text-danger">There is no Notes</h4>
+    <div class="card" *ngIf="todoList?.length> 0">
+        <div class="scrollable">
+            <div class="alert alert-success" role="alert" *ngFor="let item of todoList | filter:searchText ;let i = index;">
+                <!-- <h4 class="alert-heading">Well done!</h4> -->
+              
+                <div class="row">
+                    <div class="col-11 text-danger" [ngClass]="{'read' : item?.isRead == true}" *ngIf="item?.isRead == true">This task is completed</div>
+
+                    <div class="col-11 cursor-pointer" (click)="makeRead(i,item?.randomKey)"  title="Make as read" *ngIf="item?.isRead !== true">{{item.todoComment}}</div>
+                    <div class="text-danger delete" (click)="delete(i,item?.randomKey)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                            class="bi bi-trash" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd"
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div style="margin: auto; " class="mt-2">
+        <h4>Total Notes {{todoList.length}}</h4>
+    </div>
+</div>
