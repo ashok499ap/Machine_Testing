@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: "", redirectTo: "todo-list-view", pathMatch: "full" },
 
   {
+    
     path: "todo-list-view",
     component: TodoViewComponent,
     pathMatch: "full",
